@@ -25,7 +25,7 @@ My personal website using xbort.net as a back-end.
     "owner" : "string",
     "parents" : [
       "string"
-    ]
+    ],
     "images" : [ 
         "string"
     ],
