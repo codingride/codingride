@@ -21,7 +21,7 @@
           <a :href="'https://plus.google.com/share?url=https://codingride.com/%23/posts/show/' + slug" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="icon has-text-primary"><i class="fab fa-lg fa-google-plus-g"></i></span></a>
         </p>
       </div>
-      <div v-if="post.content" class="content">
+      <div id="post-content" v-if="post.content" class="content">
         <p v-html="post.content"></p>
       </div>
       <div v-if="post.keywords.length > 0" class="footy">
@@ -37,6 +37,7 @@
 </template>
 <script>
 import axios from 'axios'
+import gallery from './Gallery'
 
 export default {
   data () {
@@ -74,7 +75,7 @@ export default {
       },
       tmage: {
         name: 'twitter:image',
-        content: this.post.image
+        content: 'https://xbuffer.net/client/manzilak/coding_ride/?type=media&size=large&request=' + this.post.image + '&appid=' + this.appID
       }
     }
     this.metaBuilder(twitterCard, 'twitter')
@@ -98,10 +99,12 @@ export default {
       },
       image: {
         property: 'og:image',
-        content: this.post.image
+        content: 'https://xbuffer.net/client/manzilak/coding_ride/?type=media&size=large&request=' + this.post.image + '&appid=' + this.appID
       }
     }
     this.metaBuilder(social, 'og')
+
+    this.lightBox()
   },
   methods: {
     getPost: function () {
@@ -138,6 +141,18 @@ export default {
           addMeta.setAttribute('content', params[meta].content)
           document.head.appendChild(addMeta)
         }
+      }
+    },
+    lightBox: function () {
+      let light = document.getElementById('post-content')
+      let boxes = light.getElementsByTagName('img')
+      for (let i = 0; i < boxes.length; i++) {
+        let linkBox = document.createElement('a')
+        let imgLink = boxes[i].getAttribute('src')
+        linkBox.setAttribute('id', 'box_' + i)
+        linkBox.setAttribute('href', imgLink)
+        boxes[i].parentElement.insertBefore(linkBox, boxes[i])
+        linkBox.appendChild(boxes[i])
       }
     }
   }
