@@ -9,3 +9,29 @@ My personal website using xbort.net as a back-end.
 - Run npm install.
 - Run npm run dev.
 - Be creative
+
+## Post schema in xbort.net database
+```json
+{
+    "title" : "string",
+    "slug" : "string",
+    "short" : "string",
+    "content" : "string",
+    "stat" : boolean,
+    "pin" : boolean,
+    "date" : timestamp,
+    "expire" : boolean || timestamp,
+    "type" : "string",
+    "owner" : "string",
+    "parents" : [
+      "string"
+    ]
+    "images" : [ 
+        "string"
+    ],
+    "image" : "string",
+    "keywords" : [ 
+        "string"
+    ]
+}
+```
