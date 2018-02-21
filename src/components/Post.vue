@@ -15,6 +15,10 @@
         <span class="subtitle is-size-7-touch is-size-4-widescreen">{{post.short}}</span>
       </p>
       <div class="section">
+        <p v-if="post.owner" class="is-pulled-left has-text-primary">
+          {{post.owner.name}}<br>
+          <small>{{post.date | formatDate}}</small>
+        </p>
         <p class="is-pulled-right">
           <a :href="'https://twitter.com/intent/tweet?text=' + post.title + '&url=https://codingride.com/%23/posts/show/' + slug + '&via=codingride'"><span class="icon has-text-primary"><i class="fab fa-lg fa-twitter"></i></span></a>
           <a target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=https://codingride.com/%23/posts/show/' + slug " class="fb-xfbml-parse-ignore"><span class="icon has-text-primary"><i class="fab fa-lg fa-facebook"></i></span></a>
@@ -30,9 +34,8 @@
           <router-link v-for="(val, key) in post.keywords" :key="key" :to="{ path: '/posts/tag/' + val }" class="tag is-info is-medium">{{val}}</router-link>
         </div>
       </div>
-      <div id="disqus_thread"></div>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
+    <cr-gallery :gallery="gallery" :selected="selected"></cr-gallery>
   </div>
 </template>
 <script>
@@ -45,7 +48,9 @@ export default {
       gotPost: false,
       post: null,
       appID: this.$store.state.config.config.xBAppID,
-      slug: this.$route.params.post
+      slug: this.$route.params.post,
+      selected: null,
+      gallery: []
     }
   },
   created () {
@@ -103,8 +108,9 @@ export default {
       }
     }
     this.metaBuilder(social, 'og')
-
-    this.lightBox()
+    if (this.post) {
+      this.lightBox()
+    }
   },
   methods: {
     getPost: function () {
@@ -148,40 +154,28 @@ export default {
       let boxes = light.getElementsByTagName('img')
       for (let i = 0; i < boxes.length; i++) {
         let linkBox = document.createElement('a')
-        let imgLink = boxes[i].getAttribute('src')
-        linkBox.setAttribute('id', 'box_' + i)
-        linkBox.setAttribute('href', imgLink)
-        boxes[i].parentElement.insertBefore(linkBox, boxes[i])
-        linkBox.appendChild(boxes[i])
+        let linkExists = document.getElementById('box_' + i)
+        if (!linkExists) {
+          let imgLink = boxes[i].getAttribute('src')
+          boxes[i].setAttribute('id', 'box_' + i)
+          boxes[i].parentElement.insertBefore(linkBox, boxes[i])
+          linkBox.appendChild(boxes[i])
+          linkBox.addEventListener('click', this.showLightbox, false)
+          this.gallery.push({ id: i, image: imgLink })
+        }
       }
+    },
+    showLightbox: function (event) {
+      let imgSrc = event.target.src
+      let newSrc = imgSrc.replace(/\b(size=)(small|medium)/gi, 'large')
+      this.selected = { id: event.target.id, image: newSrc }
+      this.$store.dispatch('showGallery', true)
     }
+  },
+  components: {
+    'cr-gallery': gallery
   }
 }
-window.twttr = (function (d, s, id) {
-  var js
-  var fjs = d.getElementsByTagName(s)[0]
-  var t = window.twttr || {}
-  if (d.getElementById(id)) return t
-  js = d.createElement(s)
-  js.id = id
-  js.src = 'https://platform.twitter.com/widgets.js'
-  fjs.parentNode.insertBefore(js, fjs)
-
-  t._e = []
-  t.ready = function (f) {
-    t._e.push(f)
-  }
-  return t
-}(document, 'script', 'twitter-wjs'));
-
-(function (d, s, id) {
-  var js
-  var fjs = d.getElementsByTagName(s)[0]
-  if (d.getElementById(id)) return
-  js = d.createElement(s); js.id = id
-  js.src = 'https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v2.12'
-  fjs.parentNode.insertBefore(js, fjs)
-}(document, 'script', 'facebook-jssdk'))
 </script>
 <style scoped>
   .boxRide {

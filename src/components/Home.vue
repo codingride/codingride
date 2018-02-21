@@ -18,7 +18,7 @@
                   </div>
                   <div v-if="value.short" class="columns">
                     <div class="column is-4 is-offset-7 sub-column">
-                      <span v-if="value.title" class="subtitle is-size-7-touch is-size-3-widescreen">{{value.short}}</span>
+                      <router-link :to="{ path: '/posts/show/' + value.slug }"><span v-if="value.title" class="subtitle is-size-7-touch is-size-3-widescreen">{{value.short}}</span></router-link>
                     </div>
                   </div>
                 </div>

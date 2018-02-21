@@ -16,8 +16,8 @@
             </div>
             <div class="card-content">
               <div class="content">
-                <p><span class="title is-size-4-touch is-size-3-widescreen">{{v.title}}</span></p>
-                <small>Created: {{v.date | formatDate}}</small><small class="is-pulled-right"></small>
+                <p><router-link :to="{ path: '/posts/show/' + v.slug }" class="title is-size-4-touch is-size-3-widescreen">{{v.title}}</router-link></p>
+                <small>{{v.date | formatDate}}</small><small class="is-pulled-right"></small>
               </div>
             </div>
           </div>
