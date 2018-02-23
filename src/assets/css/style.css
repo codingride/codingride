@@ -33,3 +33,17 @@ html {
     margin: 15px -7em 15px 15px;
   }
 }
+
+.content pre {
+  -webkit-overflow-scrolling: touch;
+  background-color: lavenderblush;
+  overflow-x: auto;
+  padding: 1.25em 1.5em;
+  padding-top: 1.25em;
+  padding-right: 1.5em;
+  padding-bottom: 0;
+  padding-left: 1.5em;
+  white-space: pre;
+  word-wrap: normal;
+  margin: 10px 0;
+}

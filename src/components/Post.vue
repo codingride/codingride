@@ -20,9 +20,9 @@
           <small>{{post.date | formatDate}}</small>
         </p>
         <p class="is-pulled-right">
-          <a :href="'https://twitter.com/intent/tweet?text=' + post.title + '&url=https://codingride.com/%23/posts/show/' + slug + '&via=codingride'"><span class="icon has-text-primary"><i class="fab fa-lg fa-twitter"></i></span></a>
-          <a target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=https://codingride.com/%23/posts/show/' + slug " class="fb-xfbml-parse-ignore"><span class="icon has-text-primary"><i class="fab fa-lg fa-facebook"></i></span></a>
-          <a :href="'https://plus.google.com/share?url=https://codingride.com/%23/posts/show/' + slug" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="icon has-text-primary"><i class="fab fa-lg fa-google-plus-g"></i></span></a>
+          <a :href="'https://twitter.com/intent/tweet?text=' + post.title + '&url=' + web + 'posts/show/' + slug + '&via=codingride'"><span class="icon has-text-primary"><i class="fab fa-lg fa-twitter"></i></span></a>
+          <a target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=' + web + 'posts/show/' + slug " class="fb-xfbml-parse-ignore"><span class="icon has-text-primary"><i class="fab fa-lg fa-facebook"></i></span></a>
+          <a :href="'https://plus.google.com/share?url=' + web + 'posts/show/' + slug" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="icon has-text-primary"><i class="fab fa-lg fa-google-plus-g"></i></span></a>
         </p>
       </div>
       <div id="post-content" v-if="post.content" class="content">
@@ -50,7 +50,8 @@ export default {
       appID: this.$store.state.config.config.xBAppID,
       slug: this.$route.params.post,
       selected: null,
-      gallery: []
+      gallery: [],
+      web: this.$store.state.config.config.xbWeb
     }
   },
   created () {
@@ -88,7 +89,7 @@ export default {
     let social = {
       url: {
         property: 'og:url',
-        content: 'https://codingride.com/%23/posts/show/' + this.$route.params.post
+        content: this.web + 'posts/show/' + this.$route.params.post
       },
       title: {
         property: 'og:title',

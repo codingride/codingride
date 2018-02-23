@@ -8,7 +8,8 @@ const state = {
     xbPath: config.xbPath,
     xbUser: config.xbUser,
     xbProject: config.xbProject,
-    xBAppID: config.xBAppID
+    xBAppID: config.xBAppID,
+    xbWeb: config.xbWeb
   }
 }
 
