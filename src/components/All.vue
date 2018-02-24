@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <div v-if="!gotPosts" class="has-text-centered"><i class="fas fa-spinner fa-spin fa-lg fa-fw"></i><span class="sr-only">Loading...</span></div>
     <div class="grid">
       <template v-for="(v, k) in allPosts">
         <div class="grid-item" :key="k">
@@ -23,12 +22,12 @@
     </div>
     <div class="columns">
       <div class="column">
-        <nav class="level">
-          <a @click="loadPosts" class="level-item">
-            <span class="icon has-text-primary"><i class="fas fa-lg fa-redo-alt"></i></span>
+        <div v-if="!gotPosts" class="has-text-centered"><i class="fas fa-spinner fa-spin fa-lg fa-fw"></i><span class="sr-only">Loading...</span></div>
+        <nav v-if="gotPosts" class="level">
+          <a @click="loadPosts" class="level-item has-text-primary">
+            <span class="icon"><i class="fas fa-lg fa-redo-alt"></i></span>
           </a>
         </nav>
-        <div v-if="!newGetPosts" class="has-text-centered"><i class="fas fa-spinner fa-spin fa-lg fa-fw"></i><span class="sr-only">Loading...</span></div>
       </div>
     </div>
   </div>
@@ -41,7 +40,6 @@ export default {
   data () {
     return {
       gotPosts: false,
-      newGetPosts: false,
       appID: this.$store.state.config.config.xBAppID,
       allPosts: [],
       count: [],
@@ -80,14 +78,13 @@ export default {
             }
           }
           this.gotPosts = true
-          this.newGetPosts = true
         }
       }).catch(error => {
         console.log(error.response)
       })
     },
     loadPosts: function () {
-      this.newGetPosts = false
+      this.gotPosts = false
       let newOffset = this.offset + 6
       this.getAllPosts(newOffset)
     }

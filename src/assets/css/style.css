@@ -36,7 +36,8 @@ html {
 
 .content pre {
   -webkit-overflow-scrolling: touch;
-  background-color: lavenderblush;
+  background-color: #333333;
+  color: #dddddd;
   overflow-x: auto;
   padding: 1.25em 1.5em;
   padding-top: 1.25em;
@@ -46,4 +47,9 @@ html {
   white-space: pre;
   word-wrap: normal;
   margin: 10px 0;
+}
+
+.content code {
+  background-color: gainsboro;
+  padding: 2px;
 }

@@ -20,9 +20,10 @@
           <small>{{post.date | formatDate}}</small>
         </p>
         <p class="is-pulled-right">
-          <a :href="'https://twitter.com/intent/tweet?text=' + post.title + '&url=' + web + 'posts/show/' + slug + '&via=codingride'"><span class="icon has-text-primary"><i class="fab fa-lg fa-twitter"></i></span></a>
-          <a target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=' + web + 'posts/show/' + slug " class="fb-xfbml-parse-ignore"><span class="icon has-text-primary"><i class="fab fa-lg fa-facebook"></i></span></a>
-          <a :href="'https://plus.google.com/share?url=' + web + 'posts/show/' + slug" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="icon has-text-primary"><i class="fab fa-lg fa-google-plus-g"></i></span></a>
+          <a class="has-text-primary" :href="'https://twitter.com/intent/tweet?text=' + post.title + '&url=' + web + 'posts/show/' + slug + '&via=codingride'"><span class="icon"><i class="fab fa-lg fa-twitter"></i></span></a>
+          <a class="has-text-primary fb-xfbml-parse-ignore" target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=' + web + 'posts/show/' + slug "><span class="icon"><i class="fab fa-lg fa-facebook"></i></span></a>
+          <a class="has-text-primary" :href="'https://plus.google.com/share?url=' + web + 'posts/show/' + slug" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="icon"><i class="fab fa-lg fa-google-plus-g"></i></span></a>
+          <a class="has-text-primary" :href="'https://twitter.com/intent/tweet?text=' + post.title + '&url=' + web + 'posts/show/' + slug + '&via=codingride'"><span class="icon"><i class="fas fa-lg fa-comment"></i></span></a>
         </p>
       </div>
       <div id="post-content" v-if="post.content" class="content">
@@ -35,12 +36,14 @@
         </div>
       </div>
     </div>
+    <cr-comments v-if="id" :id="id"></cr-comments>
     <cr-gallery :gallery="gallery" :selected="selected"></cr-gallery>
   </div>
 </template>
 <script>
 import axios from 'axios'
-import gallery from './Gallery'
+import gallery from '@/components/Gallery'
+import Comments from '@/components/Comments'
 
 export default {
   data () {
@@ -51,7 +54,8 @@ export default {
       slug: this.$route.params.post,
       selected: null,
       gallery: [],
-      web: this.$store.state.config.config.xbWeb
+      web: this.$store.state.config.config.xbWeb,
+      id: null
     }
   },
   created () {
@@ -126,6 +130,7 @@ export default {
         if (post.data && post.data.data) {
           let parsedPost = JSON.parse(post.data.data)
           this.post = parsedPost[0]
+          this.id = this.post._id
           this.gotPost = true
         }
       }).catch(error => {
@@ -174,6 +179,7 @@ export default {
     }
   },
   components: {
+    'cr-comments': Comments,
     'cr-gallery': gallery
   }
 }

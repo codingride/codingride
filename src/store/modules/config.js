@@ -9,7 +9,8 @@ const state = {
     xbUser: config.xbUser,
     xbProject: config.xbProject,
     xBAppID: config.xBAppID,
-    xbWeb: config.xbWeb
+    xbWeb: config.xbWeb,
+    xbRecaptcha: config.xbRecaptcha
   }
 }
 

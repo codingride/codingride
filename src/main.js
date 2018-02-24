@@ -12,6 +12,14 @@ import router from './router'
 import store from './store/store'
 import axios from 'axios'
 
+// Validation
+import VeeValidate from 'vee-validate'
+const veeConfig = {
+  delay: 3
+}
+Vue.use(VeeValidate, veeConfig)
+
+// Axsios Config
 let headers = null
 let token = sessionStorage.getItem('xbToken')
 if (token) {

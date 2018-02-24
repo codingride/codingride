@@ -2,7 +2,8 @@
 
 const state = {
   loading: false,
-  gallery: false
+  gallery: false,
+  comment: false
 }
 
 const getters = {
@@ -11,6 +12,9 @@ const getters = {
   },
   getGallery: (state) => {
     return state.gallery
+  },
+  getComment: (state) => {
+    return state.comment
   }
 }
 
@@ -20,6 +24,9 @@ const mutations = {
   },
   setGallery: (state, gallery) => {
     state.gallery = gallery
+  },
+  setComment: (state, comment) => {
+    state.comment = comment
   }
 }
 
@@ -29,6 +36,9 @@ const actions = {
   },
   showGallery: ({commit}, gallery) => {
     commit('setGallery', gallery)
+  },
+  showComment: ({commit}, comment) => {
+    commit('setComment', comment)
   }
 }
 

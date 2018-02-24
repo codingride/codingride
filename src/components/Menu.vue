@@ -14,12 +14,12 @@
       <div id="navbarMenu" class="navbar-menu">
         <div class="navbar-start">
           <template v-for="(value, key) in menu">
-            <router-link class="navbar-item" active-class="is-active" :to="{ path: '/' + key }" :key="key">{{value}}</router-link>
+            <router-link class="navbar-item has-text-primary" active-class="is-active" :to="{ path: '/' + key }" :key="key">{{value}}</router-link>
           </template>
         </div>
         <div class="navbar-end">
-          <a class="navbar-item" href="https://twitter.com/codingride"><i class="fab fa-twitter"></i></a>
-          <a class="navbar-item" href="https://github.com/codingride"><i class="fab fa-github"></i></a>
+          <a class="navbar-item has-text-primary" href="https://twitter.com/codingride"><i class="fab fa-twitter"></i></a>
+          <a class="navbar-item has-text-primary" href="https://github.com/codingride"><i class="fab fa-github"></i></a>
         </div>
       </div>
     </div>
