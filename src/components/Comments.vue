@@ -5,7 +5,11 @@
       <template v-if="allComments" v-for="(comment, key) in allComments">
         <li :key="key">
           <div class="columns">
-            <div class="column is-3"><strong>{{comment.owner}}</strong><br><a class="has-text-primary" :href="'https://twitter.com/' + comment.twitter | twitter" target="_blank"><small v-if="comment.twitter">{{comment.twitter}}</small></a></div>
+            <div class="column is-3">
+              <strong>{{comment.owner}}</strong><br>
+              <a class="has-text-primary" :href="'https://twitter.com/' + comment.twitter | twitter" target="_blank"><small v-if="comment.twitter">{{comment.twitter}}</small></a><br>
+              <small>{{comment.date | formatDate}}</small>
+              </div>
             <div class="column">{{comment.content}}</div>
           </div>
         </li>

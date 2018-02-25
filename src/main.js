@@ -46,7 +46,3 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
-
-new Vue({
-  el: 'meta'
-})

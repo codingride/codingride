@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <p class="shorty">
+    <div class="shorty">
       <span class="subtitle is-size-7-touch is-size-4-widescreen">{{$route.name}} "{{$route.params.tag}}"</span>
-    </p>
+    </div>
     <div class="grid">
       <template v-for="(v, k) in allPosts">
         <div class="grid-item" :key="k">
@@ -118,12 +118,12 @@ export default {
   }
   @media screen and (min-width: 800px) {
     .grid-item {
-      width: 30%;
+      width: 32%;
     }
   }
   .grid-item {
     float: left;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
   }
   figure img {
     height: 240px;
