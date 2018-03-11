@@ -35,6 +35,7 @@
 <script>
 import axios from 'axios'
 import Masonry from 'masonry-layout'
+import imagesLoaded from 'imagesLoaded'
 
 export default {
   data () {
@@ -51,10 +52,15 @@ export default {
     this.getAllPosts()
   },
   updated () {
-    return new Masonry('.grid', {
+    let grid = document.querySelector('.grid')
+    let masonry = new Masonry('.grid', {
       itemSelector: '.grid-item',
       columnWidth: '.grid-item',
       gutter: 25
+    })
+    imagesLoaded(grid).on('progress', function () {
+      // layout Masonry after each image loads
+      masonry.layout()
     })
   },
   methods: {
@@ -107,8 +113,5 @@ export default {
   .grid-item {
     float: left;
     margin-bottom: 30px;
-  }
-  img {
-    height: 240px;
   }
 </style>

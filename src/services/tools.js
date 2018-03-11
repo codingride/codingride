@@ -12,6 +12,6 @@ Vue.filter('formatDate', function (value) {
 
 Vue.filter('twitter', function (value) {
   if (value && typeof value === 'string') {
-    return value.replace(/@/gi, '')
+    return value.replace(/[@]/, '')
   }
 })

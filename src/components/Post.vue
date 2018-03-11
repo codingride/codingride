@@ -79,7 +79,7 @@ export default {
         name: 'twitter:title',
         content: this.post.title
       },
-      tescription: {
+      description: {
         name: 'twitter:description',
         content: this.post.short
       },
