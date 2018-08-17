@@ -1,0 +1,14 @@
+extends layout
+block content
+  section(class="section")
+    div(class="container")
+      if !page
+        div(class="has-text-centered")
+          i(class="fas fa-spinner fa-spin fa-lg fa-fw") 
+          span(class="sr-only") Loading...
+      if page
+        h1(class="title") #{page.title}
+        if page.short
+          h2(class="subtitle") #{page.short}
+        if page.content
+          div !{page.content}

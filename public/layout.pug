@@ -1,0 +1,77 @@
+doctype html
+head
+  meta(charset="utf-8")
+  meta(http-equiv="content-language" content="en-us")
+  meta(http-equiv="X-UA-Compatible" content="IE=edge")
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+  meta(name="referrer" content="always")
+  meta(name="keywords" content="Programming, Web Development, VueJS, Vue, Bulma, NodeJS, Node, JavaScript")
+  meta(name="description")&attributes({'content': globalDescription})
+  meta(name="copyright" content="&copy; 2007-2018 codingRide.")
+  if social
+    -var socialUrl = postSlug ? globalUrl + '/post/' + postSlug : globalUrl
+    meta(property="og:url")&attributes({'content': socialUrl})
+    -var socialTitle = postTitle ? postTitle : globalTitle
+    meta(property="og:title")&attributes({'content': socialTitle})
+    meta(property="og:type" content="blog")
+    -var socialDescription = postDescription ? postDescription : globalDescription
+    meta(property="og:description")&attributes({'content': socialDescription})
+    -var socialImage = postImage ? "https://xbuffer.net/client/manzilak/coding_ride/?type=media&request=" + postImage + "&appid=" + xbAppID : "/images/codingRide.png"
+    meta(property="og:image")&attributes({'content': socialImage})
+  if twitter
+    meta(name="twitter:card" content="summary_large_image")
+    meta(name="twitter:site" content="@codingride")
+    meta(name="twitter:creator" content="@codingride")
+    -var twitterTitle = postTitle ? postTitle : globalTitle
+    meta(name="twitter:title")&attributes({'content': twitterTitle})
+    -var twitterDescription = postDescription ? postDescription : globalDescription
+    meta(name="twitter:description")&attributes({'content': twitterDescription})
+    -var twitterImage = postImage ? "https://xbuffer.net/client/manzilak/coding_ride/?type=media&request=" + postImage + "&appid=" + xbAppID : "/images/codingRide.png"
+    meta(property="og:image")&attributes({'content': twitterImage})
+  link(rel="icon" href="/images/cR.png" type="image/png" sizes="16x16")
+  link(rel="stylesheet" type="text/css" media="screen" href="/css/bulma.min.css")
+  link(rel="stylesheet" type="text/css" media="screen" href="/css/swiper.min.css")
+  link(rel="stylesheet" type="text/css" media="screen" href="/css/fontawesome-all.min.css")
+  link(rel="stylesheet" type="text/css" media="screen" href="/css/kalimah.css")
+  title #{postTitle} | #{globalTitle}
+body
+  nav(class="navbar is-light")
+    div(class="container")
+      div(class="navbar-brand")
+        a(class="navbar-item" to="/")
+          img(src="/images/codingRide.png" :alt="title")
+        span(id="burger" class="navbar-burger burger" data-target="navbarMenu" onclick="openMenu")
+          span
+          span
+          span
+      div(id="navbarMenu" class="navbar-menu")
+        div(class="navbar-start")
+          each value, key in mainMenu
+            a(class="navbar-item has-text-primary")&attributes({'href': value}) #{key}
+        div(class="navbar-end")
+          a(class="navbar-item has-text-primary" href="https://twitter.com/codingride")
+            i(class="fab fa-twitter")
+          a(class="navbar-item has-text-primary" href="https://github.com/codingride")
+            i(class="fab fa-github")
+    
+  block content
+
+  script(src="/js/swiper.min.js")
+  script(src="/js/masonry.min.js")
+  script(src="/js/imagesloaded.min.js")
+  script(src="/js/kalimah.js")
+  
+  footer(class="footer")
+    div(class="container")
+      div(class="content has-text-centered")
+        p
+          span
+            i(class="far fa-copyright") 
+          <strong> codingRide</strong> #{thisYear} <br />
+          span(class="is-size-7") Powered by 
+            a(class="has-text-primary" href="https://xbort.net") 
+              strong Xbort 
+          span(class="is-size-7") and 
+            a(class="has-text-primary" href="https://kalimah.net") 
+              strong Kalimah

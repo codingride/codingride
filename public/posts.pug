@@ -1,0 +1,38 @@
+extends layout
+block content
+  section(class="section post-section")
+    div(class="container")
+      if !posts
+        div(class="has-text-centered")
+          i(class="fas fa-spinner fa-spin fa-lg fa-fw") 
+          span(class="sr-only") Loading...
+      if posts
+        div(class="grid")
+          each value, key in posts
+            div(class="grid-item")
+              div(class="card boxRide")
+                div(class="card-image")
+                  figure(class="image")
+                    if value.image
+                      a(class="card-footer-item" href="/post/" + value.postLink)
+                        img(src="https://xbuffer.net/client/manzilak/coding_ride/?type=media&size=large&request=" + value.postImage + "&appid=" + xbAppID)
+                    else
+                      a(class="card-footer-item" heref="/post/" + value.postLink)
+                        img(src="https://xbuffer.net/client/manzilak/coding_ride/?type=media&size=large&request=assets/holder.jpg&appid=" + xbAppID)
+                div(class="card-content")
+                  div(class="content")
+                    p
+                      a(href="/post/" + value.slug class="title posts-title is-size-4-touch is-size-3-widescreen") #{value.title}
+                      small(class="is-pulled-right") #{value.postDate}
+        div(class="columns")
+          div(class="column")
+            if !gotPosts
+              div(class="has-text-centered")
+                i(class="fas fa-spinner fa-spin fa-lg fa-fw")
+                span(class="sr-only") Loading...
+            if gotPosts
+              nav(class="level")
+                a(onclick="loadPosts" class="level-item has-text-primary")
+                  span(class="icon")
+                    i(class="fas fa-lg fa-redo-alt")
+                    

@@ -1,37 +1,31 @@
 # codingride
-My personal website using xbort.net as a back-end.
+My personal website using xbort.net as a back-end and kalimah.net as CMS.
 
 ## Usage
 - Clone the repository.
-- Make sure you have Vue-CLI installed globally.
-- Change "src/config.js" configurations based on your xbort.net account details.
-- Change "config/index.js" host and port to fit your development environment.
+- Change "settings.js" configurations based on your xbort.net account details.
 - Run npm install.
-- Run npm run dev.
+- Run node kalmiah.js or add it to PM2 list.
 - Be creative
 
 ## Post schema in xbort.net database
 ```json
 {
-    "title" : "string",
-    "slug" : "string",
-    "short" : "string",
-    "content" : "string",
-    "stat" : true,
-    "pin" : false,
+    "postTitle" : "string",
+    "postLink" : "string",
+    "postContent" : "string",
+    "postStatus" : "string",
+    "postPin" : "string",
     "date" : 1518999691000,
-    "expire" : false,
-    "type" : "string",
-    "owner" : "string",
-    "parents" : [
-      "string"
-    ],
-    "images" : [ 
+    "postType" : "string",
+    "postOwner" : "string",
+    "postCategory" : {},
+    "postMedia" : [ 
         "string"
     ],
-    "image" : "string",
-    "keywords" : [ 
-        "string"
+    "postImage" : "string",
+    "postTags" : [ 
+        {}
     ]
 }
 ```

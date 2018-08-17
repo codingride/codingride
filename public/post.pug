@@ -1,0 +1,52 @@
+extends layout
+block content
+  section(class="section post-section")
+    div(class="container")
+      if !post
+        div(class="has-text-centered")
+          i(class="fas fa-spinner fa-spin fa-lg fa-fw") 
+          span(class="sr-only") Loading...
+      if post
+      div
+        if post.image
+          figure(class="image boxRide post-boxRide")
+            a(class="card-footer-item" href="/posts/show/" + post.slug)
+              img(class="main-image" src="https://xbuffer.net/client/manzilak/coding_ride/?type=media&size=large&request=" + post.image + "&appid=" + xbAppID)
+            div(class="is-overlay")
+              span(class="title post-title is-size-5-touch is-size-1-widescreen is-pulled-right") #{post.title}
+        else
+          div
+            span(class="title post-title is-size-5-touch is-size-1-widescreen") #{post.title}
+        if post.short
+          p(class="shorty")
+            span(class="subtitle post-subtitle is-size-7-touch is-size-4-widescreen") #{post.short}
+        div(class="section post-section")
+          if post.owner
+            div(class="level")
+              p(class="is-pulled-left has-text-primary") #{post.owner.name}
+                br
+                small #{post.date}
+              p(class="is-pulled-right")
+                a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.title + "&url=" + web + "post/show/" + slug + "&via=codingride")
+                  span(class="icon")
+                    i(class="fab fa-lg fa-twitter")
+                a(class="has-text-primary fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=" + web + "posts/show/" + slug)
+                  span(class="icon")
+                    i(class="fab fa-lg fa-facebook")
+                a(class="has-text-primary" href="https://plus.google.com/share?url=" + web + "posts/show/" + slug onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;")
+                  span(class="icon")
+                    i(class="fab fa-lg fa-google-plus-g")
+                a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.title + "&url=" + web + "posts/show/" + slug + "&via=codingride")
+                  span(class="icon")
+                    i(class="fas fa-lg fa-comment")
+          if post.content
+            div(id="post-content" class="content post-content")
+              p !{post.content}
+          if post.keywords.length > 0
+            div(class="footy")
+              p Filed under:
+              div(class="tags")
+                each val, key in post.keywords
+                  a(href="/posts/tag/" + val class="tag is-info is-medium") #{val}
+            //- replace with include <cr-comments v-if="id" :id="id"></cr-comments>
+            //- replace with fancybox <cr-gallery :gallery="gallery" :selected="selected"></cr-gallery>
