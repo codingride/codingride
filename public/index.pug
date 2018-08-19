@@ -12,20 +12,20 @@ block content
             each value, key in posts
               div(class="swiper-slide")
                 figure(class="image")
-                  if value.image
-                  img(src="https://xbuffer.net/client/manzilak/coding_ride/?type=media&request=" + value.image + "&appid=" + xbAppID)
+                  if value.postImage
+                  img(src="https://" + xbData.xbUrl + "/client/" + xbData.xbUser + "/" + xbData.xbProject + "/?type=media&request=" + value.postImage + "&appid=" + xbData.xbAppID + "&size=large")
                 </figure>
                 div(class="is-overlay slide-overlay hero")
                   div(class="hero-body")
-                    if value.title
+                    if value.postTitle
                     div(class="columns")
                       div(class="column is-5 is-offset-6")
-                        a(href="/post/" + value.slug)
-                          if value.title
-                            span(class="title home-title is-size-5-touch is-size-1-widescreen") #{value.title}
+                        a(href="/post/" + value.postLink)
+                          if value.postTitle
+                            span(class="title home-title is-size-5-touch is-size-1-widescreen") #{value.postTitle}
                     div(class="columns")
                       div(class="column is-4 is-offset-7 sub-column")
-                        a(href="/post/" + value.slug)
+                        a(href="/post/" + value.postLink)
                           if value.short
                             span(class="subtitle home-subtitle is-size-7-touch is-size-3-widescreen") #{value.short}
           <!-- Add Pagination -->

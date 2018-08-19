@@ -11,7 +11,7 @@ content.prepareGetConnection = (type, term) => {
     case 'home':
     // Try using max= to not bring all posts
     settings.xbRequest = `${settings.xbPrefix}posts`;
-    settings.xbGetby = 'postType:article,postStatus:Publish,postStatus:Pin';
+    settings.xbGetby = 'postType:article,postStatus:Pin';
     settings.xbMax = 6;
     getRequest = request.prepareGetRequest(settings, 'get-by');
       break;
@@ -20,10 +20,10 @@ content.prepareGetConnection = (type, term) => {
     let reqType = 'request-offset';
     if(term.type === 'category') {
       type = 'get-by';
-      settings.xbGetby = `postCategory.category_link:${term.term}`;
+      settings.xbGetby = `postCategory-category_link:${term.term},postStatus:Publish`;
     } else if(term.type === 'tag') {
       type = 'get-by';
-      settings.xbGetby = `postTags.tag_link:${term.term}`;
+      settings.xbGetby = `postTags-tag_link:${term.term},postStatus:Publish`;
     } else {
       type = 'request-offset';
     }

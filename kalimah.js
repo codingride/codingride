@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
   settings.prepareConfigParams((globalsError, globalsData) => {
     if(!globalsError && globalsData) {
       content.home((homeError, homeData) => {
+        console.log(globalsData)
         if(!homeError && homeData) {
           res.render('index', {
             globalTitle: globalsData.settings.title,
@@ -27,7 +28,7 @@ app.get('/', (req, res) => {
             mainMenu: globalsData.menus.main_menu,
             thisYear: new Date().getFullYear(),
             posts: homeData,
-            xbAppID: settings.Xbuffer.xbAppID,
+            xbData: settings.Xbuffer,
             social: true,
             twitter: false
           });

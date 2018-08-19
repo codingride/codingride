@@ -8,7 +8,6 @@ let request = {}
 request.get = (options, callback) => {
   let result = '';
   let error = null;
-
   if(options) {
     const getRequest = https.request(options, (getResult) => {
       getResult.setEncoding('utf8');
