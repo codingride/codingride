@@ -8,6 +8,8 @@ const settings = require('./settings');
 const tools = require('./core/tools');
 const content = require('./core/content');
 
+const he = require('he');
+
 app.set('views', path.join(__dirname, 'public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'pug');
@@ -19,7 +21,6 @@ app.get('/', (req, res) => {
   settings.prepareConfigParams((globalsError, globalsData) => {
     if(!globalsError && globalsData) {
       content.home((homeError, homeData) => {
-        console.log(globalsData)
         if(!homeError && homeData) {
           res.render('index', {
             globalTitle: globalsData.settings.title,
@@ -160,6 +161,10 @@ app.get('/post/:term', (req, res) => {
       if(post) {
         content.post(post, (postError, postData) => {
           if(!postError && postData) {
+            // Decode post content before Pug render
+            if(postData.postContent) {
+              postData.postContent = he.decode(postData.postContent);
+            }
             res.render('post', {
               globalTitle: globalsData.settings.title,
               globalDescription: globalsData.settings.description,
@@ -171,7 +176,7 @@ app.get('/post/:term', (req, res) => {
               mainMenu: globalsData.menus.main_menu,            
               thisYear: new Date().getFullYear(),
               post: postData,
-              xbAppID: settings.Xbuffer.xbAppID,
+              xbData: settings.Xbuffer,
               social: true,
               twitter: true
             });

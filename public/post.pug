@@ -8,45 +8,45 @@ block content
           span(class="sr-only") Loading...
       if post
       div
-        if post.image
+        if post.postImage
           figure(class="image boxRide post-boxRide")
-            a(class="card-footer-item" href="/posts/show/" + post.slug)
-              img(class="main-image" src="https://xbuffer.net/client/manzilak/coding_ride/?type=media&size=large&request=" + post.image + "&appid=" + xbAppID)
+            a(class="card-footer-item" href="/posts/show/" + post.postLink)
+              img(class="main-image" src="https://" + xbData.xbUrl + "/client/" + xbData.xbUser + "/" + xbData.xbProject + "/?type=media&request=" + post.postImage + "&appid=" + xbData.xbAppID + "&size=large")
             div(class="is-overlay")
-              span(class="title post-title is-size-5-touch is-size-1-widescreen is-pulled-right") #{post.title}
+              span(class="title post-title is-size-5-touch is-size-1-widescreen is-pulled-right") #{post.postTitle}
         else
           div
-            span(class="title post-title is-size-5-touch is-size-1-widescreen") #{post.title}
-        if post.short
+            span(class="title post-title is-size-5-touch is-size-1-widescreen") #{post.postTitle}
+        if post.postBrief
           p(class="shorty")
-            span(class="subtitle post-subtitle is-size-7-touch is-size-4-widescreen") #{post.short}
+            span(class="subtitle post-subtitle is-size-7-touch is-size-4-widescreen") #{post.postBrief}
         div(class="section post-section")
-          if post.owner
+          if post.postOwner
             div(class="level")
-              p(class="is-pulled-left has-text-primary") #{post.owner.name}
+              p(class="is-pulled-left has-text-primary") #{post.postOwner}
                 br
-                small #{post.date}
+                small #{post.postDate}
               p(class="is-pulled-right")
-                a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.title + "&url=" + web + "post/show/" + slug + "&via=codingride")
+                a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.postTitle + "&url=" + globalUrl + "/post/" + post.postLink + "&via=codingride")
                   span(class="icon")
                     i(class="fab fa-lg fa-twitter")
-                a(class="has-text-primary fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=" + web + "posts/show/" + slug)
+                a(class="has-text-primary fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=" + globalUrl + "/posts/show/" + post.postLink)
                   span(class="icon")
                     i(class="fab fa-lg fa-facebook")
-                a(class="has-text-primary" href="https://plus.google.com/share?url=" + web + "posts/show/" + slug onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;")
+                a(class="has-text-primary" href="https://plus.google.com/share?url=" + globalUrl + "/posts/" + post.postLink onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;")
                   span(class="icon")
                     i(class="fab fa-lg fa-google-plus-g")
-                a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.title + "&url=" + web + "posts/show/" + slug + "&via=codingride")
+                a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.title + "&url=" + globalUrl + "/posts/" + post.postLink + "&via=codingride")
                   span(class="icon")
                     i(class="fas fa-lg fa-comment")
-          if post.content
+          if post.postContent
             div(id="post-content" class="content post-content")
-              p !{post.content}
-          if post.keywords.length > 0
+              p !{post.postContent}
+          if post.postTags.length > 0
             div(class="footy")
               p Filed under:
               div(class="tags")
-                each val, key in post.keywords
-                  a(href="/posts/tag/" + val class="tag is-info is-medium") #{val}
+                each val, key in post.postTags
+                  a(href="/posts/tag/" + val.tag_name class="tag is-info is-medium") #{val.tag_name}
             //- replace with include <cr-comments v-if="id" :id="id"></cr-comments>
             //- replace with fancybox <cr-gallery :gallery="gallery" :selected="selected"></cr-gallery>

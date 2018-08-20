@@ -23,15 +23,19 @@ html {
 }
 
 @media screen and (min-width: 770px) {
-  img.is-pulled-left {
+  .image-style-align-left>img {
     padding: 15px;
     border: 1px solid lightgray;
     margin: 15px 15px 15px -7em;
+    float: left;
+    width: 25vw;
   }
-  img.is-pulled-right {
+  .image-style-align-right>img {
     padding: 15px;
     border: 1px solid lightgray;
     margin: 15px -7em 15px 15px;
+    float: right;
+    width: 25vw;
   }
 }
 
@@ -53,6 +57,10 @@ html {
 .content code {
   background-color: gainsboro;
   padding: 2px;
+}
+
+.footer {
+  background-color: transparent;
 }
 
 /*               */

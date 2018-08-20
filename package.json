@@ -1,6 +1,6 @@
 {
   "name": "codingride",
-  "version": "3.0.0",
+  "version": "1.0.2",
   "description": "Kalimah Content Management System",
   "repository": {
     "type": "git",
@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
+    "he": "^1.1.1",
     "pug": "^2.0.3"
   },
   "devDependencies": {

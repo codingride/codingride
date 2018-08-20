@@ -11,7 +11,7 @@ content.prepareGetConnection = (type, term) => {
     case 'home':
     // Try using max= to not bring all posts
     settings.xbRequest = `${settings.xbPrefix}posts`;
-    settings.xbGetby = 'postType:article,postStatus:Pin';
+    settings.xbGetby = 'postType:article,postStatus:Publish,postPin:Pin';
     settings.xbMax = 6;
     getRequest = request.prepareGetRequest(settings, 'get-by');
       break;
@@ -37,7 +37,7 @@ content.prepareGetConnection = (type, term) => {
 
     case 'post':
     settings.xbRequest = `${settings.xbPrefix}posts`;
-    settings.xbGetby = `postType:article,postStatus:Publish,postStatus:Pin,postLink:${term}`;
+    settings.xbGetby = `postType:article,postStatus:Publish,postLink:${term}`;
     getRequest = request.prepareGetRequest(settings, 'get-by');
       break;
 
