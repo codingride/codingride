@@ -1,6 +1,6 @@
 extends layout
 block content
-  section(class="section post-section")
+  section(class="section")
     div(class="container")
       if !post
         div(class="has-text-centered")
@@ -10,43 +10,42 @@ block content
       div
         if post.postImage
           figure(class="image boxRide post-boxRide")
-            a(class="card-footer-item" href="/posts/show/" + post.postLink)
-              img(class="main-image" src="https://" + xbData.xbUrl + "/client/" + xbData.xbUser + "/" + xbData.xbProject + "/?type=media&request=" + post.postImage + "&appid=" + xbData.xbAppID + "&size=large")
+            img(class="main-image" src="https://" + xbData.xbUrl + "/client/" + xbData.xbUser + "/" + xbData.xbProject + "/?type=media&request=" + post.postImage + "&appid=" + xbData.xbAppID + "&size=large")
             div(class="is-overlay")
-              span(class="title post-title is-size-5-touch is-size-1-widescreen is-pulled-right") #{post.postTitle}
+              span(class="title post-title is-size-5-touch is-size-1-desktop is-pulled-right") #{post.postTitle}
         else
-          div
-            span(class="title post-title is-size-5-touch is-size-1-widescreen") #{post.postTitle}
+          figure(class="image boxRide post-boxRide")
+            img(class="main-image" src="/images/codingRide.png")
+            div(class="is-overlay")
+              span(class="title post-title is-size-5-touch is-size-1-widescreen") #{post.postTitle}
         if post.postBrief
           p(class="shorty")
             span(class="subtitle post-subtitle is-size-7-touch is-size-4-widescreen") #{post.postBrief}
         div(class="section post-section")
-          if post.postOwner
-            div(class="level")
-              p(class="is-pulled-left has-text-primary") #{post.postOwner}
-                br
-                small #{post.postDate}
-              p(class="is-pulled-right")
-                a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.postTitle + "&url=" + globalUrl + "/post/" + post.postLink + "&via=codingride")
-                  span(class="icon")
-                    i(class="fab fa-lg fa-twitter")
-                a(class="has-text-primary fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=" + globalUrl + "/posts/show/" + post.postLink)
-                  span(class="icon")
-                    i(class="fab fa-lg fa-facebook")
-                a(class="has-text-primary" href="https://plus.google.com/share?url=" + globalUrl + "/posts/" + post.postLink onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;")
-                  span(class="icon")
-                    i(class="fab fa-lg fa-google-plus-g")
-                a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.title + "&url=" + globalUrl + "/posts/" + post.postLink + "&via=codingride")
-                  span(class="icon")
-                    i(class="fas fa-lg fa-comment")
-          if post.postContent
-            div(id="post-content" class="content post-content")
-              p !{post.postContent}
-          if post.postTags.length > 0
-            div(class="footy")
-              p Filed under:
-              div(class="tags")
-                each val, key in post.postTags
-                  a(href="/posts/tag/" + val.tag_name class="tag is-info is-medium") #{val.tag_name}
-            //- replace with include <cr-comments v-if="id" :id="id"></cr-comments>
-            //- replace with fancybox <cr-gallery :gallery="gallery" :selected="selected"></cr-gallery>
+          p(class="is-pulled-left has-text-primary")
+            small #{tools.timeToDate(post.postDate)}
+          p(class="is-pulled-right")
+            span(class="icon social-icon")
+              a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.postTitle + "&url=" + globalUrl + "/post/" + post.postLink + "&via=codingride")
+                i(class="fab fa-lg fa-twitter")
+            span(class="icon social-icon")
+              a(class="has-text-primary fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=" + globalUrl + "/posts/show/" + post.postLink)
+                i(class="fab fa-lg fa-facebook")
+            span(class="icon social-icon")
+              a(class="has-text-primary" href="https://plus.google.com/share?url=" + globalUrl + "/posts/" + post.postLink onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;")
+                i(class="fab fa-lg fa-google-plus-g")
+            span(class="icon social-icon")
+              a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.title + "&url=" + globalUrl + "/posts/" + post.postLink + "&via=codingride")
+                i(class="fas fa-lg fa-comment")
+        if post.postContent
+          div(id="post-content" class="content post-content")
+            p !{post.postContent}
+        if post.postTags.length > 0
+          div(class="footy")
+            div(class="tags")
+              each val, key in post.postTags
+                a(href="/posts/tag/" + val.tag_link class="tag is-info is-medium") #{val.tag_name}
+        p(class="subtitle listHead")
+          strong Let's Hear From You
+        div(id="disqus_thread")
+        script(src="/js/disqus.js")

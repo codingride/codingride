@@ -1,7 +1,10 @@
 
-@import url('../webfonts/SourceSansPro-Regular.ttf');
-body {
-  font-family: 'Source Code Pro', sans-serif;
+@font-face {
+  font-family: codingrideRegular;
+  src: url('../webfonts/SourceCodeVariable-Roman.ttf');
+}
+body, p, h1, h2, h3, h4, h5, h6, .content, .title, .label {
+  font-family: codingrideRegular, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, .title, .label {
@@ -23,16 +26,14 @@ html {
 }
 
 @media screen and (min-width: 770px) {
-  .image-style-align-left>img {
+  figure.image-style-align-left {
     padding: 15px;
-    border: 1px solid lightgray;
     margin: 15px 15px 15px -7em;
     float: left;
     width: 25vw;
   }
-  .image-style-align-right>img {
+  figure.image-style-align-right {
     padding: 15px;
-    border: 1px solid lightgray;
     margin: 15px -7em 15px 15px;
     float: right;
     width: 25vw;
@@ -127,8 +128,14 @@ html {
   line-height: 1.75;
   margin-top: 20px;
 }
+.social-icon {
+  width: 30px;
+}
 .post-content {
   margin: 25px 0;
+}
+.post-section {
+  padding: 20px 0 20px 0;
 }
 .shorty {
   margin: 30px 0 0 0;
@@ -138,9 +145,6 @@ html {
 .post-subtitle {
   color: #333366;
 }
-.post-section {
-  padding: 25px 0 25px 0;
-}
 @media screen and (min-width: 770px) {
   .post-content {
     padding: 0 180px 0 180px;
@@ -149,18 +153,27 @@ html {
     padding: 0 180px 0 180px;
   }
   .post-boxRide {
+    position: relative;
     height: 280px;
     overflow: hidden;
-    margin: 0 auto;
-    position: relative;
+    width: 100%;
   }
   img.main-image {
-    left: 50%;
-    margin-left: -672px;
-    top: 50%;
-    margin-top: -350px;
-    position:absolute;
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
   }
+}
+.listHead {
+  margin-top: 35px;
+  padding: 15px;
+  background-color: #ededed;
+  border-bottom: 5px solid #ddd;
 }
 
 /*                 */

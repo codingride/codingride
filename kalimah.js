@@ -120,6 +120,7 @@ app.get('/posts/:type/:term/:offset?', (req, res) => {
       }
       content.posts(type, term, offset, (postsError, postsData) => {
         if(!postsError && postsData) {
+          console.log(postsData)
           res.render('posts', {
             globalTitle: globalsData.settings.title,
             globalDescription: globalsData.settings.description,
@@ -127,9 +128,10 @@ app.get('/posts/:type/:term/:offset?', (req, res) => {
             mainMenu: globalsData.menus.main_menu,
             thisYear: new Date().getFullYear(),
             posts: postsData,
-            xbAppID: settings.Xbuffer.xbAppID,
+            xbData: settings.Xbuffer,
             social: true,
-            twitter: false
+            twitter: false,
+            tools: tools
           });
         } else {
           res.render('error', {
@@ -178,7 +180,8 @@ app.get('/post/:term', (req, res) => {
               post: postData,
               xbData: settings.Xbuffer,
               social: true,
-              twitter: true
+              twitter: true,
+              tools: tools
             });
           } else {
             res.render('error', {
