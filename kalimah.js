@@ -23,9 +23,9 @@ app.get('/', (req, res) => {
       content.home((homeError, homeData) => {
         if(!homeError && homeData) {
           res.render('index', {
-            globalTitle: globalsData.settings.title,
-            globalDescription: globalsData.settings.description,
-            globalUrl: globalsData.settings.url,
+            globalTitle: globalsData.config.title,
+            globalDescription: globalsData.config.description,
+            globalUrl: globalsData.config.url,
             mainMenu: globalsData.menus.main_menu,
             thisYear: new Date().getFullYear(),
             posts: homeData,
@@ -35,9 +35,9 @@ app.get('/', (req, res) => {
           });
         } else {
           res.render('error', {
-            globalTitle: globalsData.settings.title,
-            globalDescription: globalsData.settings.description,
-            globalUrl: globalsData.settings.url,              
+            globalTitle: globalsData.config.title,
+            globalDescription: globalsData.config.description,
+            globalUrl: globalsData.config.url,              
             mainMenu: globalsData.menus.main_menu
           });
         }
@@ -48,96 +48,52 @@ app.get('/', (req, res) => {
   });
 });
 
-// Get page request
-// @params post slug
-app.get('/page/:term', (req, res) => {
-  // Getting Settings and global vars first
-  // Website should not be rendered without global vars
-  settings.prepareConfigParams((globalsError, globalsData) => {
-    if(!globalsError && globalsData) {
-      let reqParams = req.params;
-      let page = '';
-      if(reqParams.term) {
-        page = tools.typeCheck(reqParams.term, 'string');
-      }
-      if(page) {
-        content.page(page, (pageError, pageData) => {
-          if(!pageError && pageData) {
-            res.render('page', {
-              globalTitle: globalsData.settings.title,
-              globalDescription: globalsData.settings.description,
-              globalUrl: globalsData.settings.url,
-              postTitle: pageData.title,
-              postDescription: pageData.short,
-              postSlug: pageData.slug,
-              postImage: pageData.image,
-              mainMenu: globalsData.menus.main_menu,            
-              thisYear: new Date().getFullYear(),
-              page: pageData,
-              xbAppID: settings.Xbuffer.xbAppID,
-              social: true,
-              twitter: true
-            });
-          } else {
-            res.render('error', {
-              globalTitle: globalsData.settings.title,
-              globalDescription: globalsData.settings.description,
-              globalUrl: globalsData.settings.url,              
-              mainMenu: globalsData.menus.main_menu
-            });
-          }
-        });
-      } else {
-        res.render('error', {
-          globalTitle: globalsData.settings.title,
-          globalDescription: globalsData.settings.description,
-          globalUrl: globalsData.settings.url
-        });
-      }
-    } else {
-      res.send('Problem Openning Website!')
-    }
-  });
-});
-
 // Get posts request
-app.get('/posts/:type/:term/:offset?', (req, res) => {
+app.get('/:type/:term/:offset?', (req, res) => {
   let acceptedTypes = ['category', 'tag'];
   let reqParams = req.params;
-  let type = 'posts';
+  let type = '';
+  let term = 'all';
+  let pagination = {}
   if(reqParams.type && acceptedTypes.includes(reqParams.type)) {
     type = reqParams.type;
   }
+  if(reqParams.term) {
+    term = tools.typeCheck(reqParams.term, 'string');
+    pagination.term = term;
+  }
+  let link = `/${type}/${term}`
   let offset = 0;
   if(reqParams.offset && typeof parseInt(reqParams.offset) === 'number') {
     offset = parseInt(reqParams.offset);
   }
+  pagination = {
+    link: link,
+    offset: offset
+  }
   settings.prepareConfigParams((globalsError, globalsData) => {
     if(!globalsError && globalsData) {
-      let term = 'all';
-      if(reqParams.term) {
-        term = tools.typeCheck(reqParams.term, 'string');
-      }
       content.posts(type, term, offset, (postsError, postsData) => {
         if(!postsError && postsData) {
-          console.log(postsData)
+          pagination.pages = Math.floor(postsData.count / settings.Xbuffer.xbMaxRecords);
           res.render('posts', {
-            globalTitle: globalsData.settings.title,
-            globalDescription: globalsData.settings.description,
-            globalUrl: globalsData.settings.url,
+            globalTitle: globalsData.config.title,
+            globalDescription: globalsData.config.description,
+            globalUrl: globalsData.config.url,
             mainMenu: globalsData.menus.main_menu,
             thisYear: new Date().getFullYear(),
-            posts: postsData,
+            posts: postsData.data,
             xbData: settings.Xbuffer,
             social: true,
             twitter: false,
-            tools: tools
+            tools: tools,
+            pagination: pagination
           });
         } else {
           res.render('error', {
-            globalTitle: globalsData.settings.title,
-            globalDescription: globalsData.settings.description,
-            globalUrl: globalsData.settings.url,              
+            globalTitle: globalsData.config.title,
+            globalDescription: globalsData.config.description,
+            globalUrl: globalsData.config.url,              
             mainMenu: globalsData.menus.main_menu
           });
         }
@@ -150,9 +106,19 @@ app.get('/posts/:type/:term/:offset?', (req, res) => {
 
 // Get post request
 // @params post slug
-app.get('/post/:term', (req, res) => {
+app.get('/:term', (req, res) => {
   // Getting Settings and global vars first
   // Website should not be rendered without global vars
+  let reqParams = req.params;
+  let term = '';
+  let pagination = {}
+  if(reqParams.term) {
+    term = tools.typeCheck(reqParams.term, 'string');
+    pagination.term = term;
+  }
+  pagination = {
+    link: `/${term}`
+  }
   settings.prepareConfigParams((globalsError, globalsData) => {
     if(!globalsError && globalsData) {
       let reqParams = req.params;
@@ -168,9 +134,9 @@ app.get('/post/:term', (req, res) => {
               postData.postContent = he.decode(postData.postContent);
             }
             res.render('post', {
-              globalTitle: globalsData.settings.title,
-              globalDescription: globalsData.settings.description,
-              globalUrl: globalsData.settings.url,
+              globalTitle: globalsData.config.title,
+              globalDescription: globalsData.config.description,
+              globalUrl: globalsData.config.url,
               postTitle: postData.title,
               postDescription: postData.short,
               postSlug: postData.slug,
@@ -181,13 +147,14 @@ app.get('/post/:term', (req, res) => {
               xbData: settings.Xbuffer,
               social: true,
               twitter: true,
-              tools: tools
+              tools: tools,
+              pagination: pagination
             });
           } else {
             res.render('error', {
-              globalTitle: globalsData.settings.title,
-              globalDescription: globalsData.settings.description,
-              globalUrl: globalsData.settings.url,
+              globalTitle: globalsData.config.title,
+              globalDescription: globalsData.config.description,
+              globalUrl: globalsData.config.url,
               mainMenu: globalsData.menus.main_menu,
               thisYear: new Date().getFullYear(),
               xbAppID: settings.Xbuffer.xbAppID,
@@ -198,9 +165,9 @@ app.get('/post/:term', (req, res) => {
         });
       } else {
         res.render('error', {
-          globalTitle: globalsData.settings.title,
-          globalDescription: globalsData.settings.description,
-          globalUrl: globalsData.settings.url,
+          globalTitle: globalsData.config.title,
+          globalDescription: globalsData.config.description,
+          globalUrl: globalsData.config.url,
           mainMenu: globalsData.menus.main_menu,
           thisYear: new Date().getFullYear(),
           xbAppID: settings.Xbuffer.xbAppID,
@@ -221,9 +188,9 @@ app.use((req, res) => {
   settings.prepareConfigParams((globalsError, globalsData) => {
     if(!globalsError && globalsData) {
         res.render('error', {
-          globalTitle: globalsData.settings.title,
-          globalDescription: globalsData.settings.description,
-          globalUrl: globalsData.settings.url,
+          globalTitle: globalsData.config.title,
+          globalDescription: globalsData.config.description,
+          globalUrl: globalsData.config.url,
           mainMenu: globalsData.menus.main_menu,
           thisYear: new Date().getFullYear(),
           xbAppID: settings.Xbuffer.xbAppID,

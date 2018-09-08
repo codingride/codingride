@@ -41,14 +41,17 @@ body
       div(class="navbar-brand")
         a(class="navbar-item" to="/")
           img(src="/images/codingRide.png" :alt="title")
-        span(id="burger" class="navbar-burger burger" data-target="navbarMenu" onclick="openMenu")
+        div(id="burger" class="navbar-burger burger" data-target="navbarMenu" onclick="openMenu()")
           span
           span
           span
       div(id="navbarMenu" class="navbar-menu")
         div(class="navbar-start")
           each value, key in mainMenu
-            a(class="navbar-item has-text-primary")&attributes({'href': value}) #{key}
+            - if(pagination && value === pagination.link)
+              a(class="navbar-item has-text-primary is-active")&attributes({'href': value}) #{key}
+            - else
+              a(class="navbar-item has-text-primary")&attributes({'href': value}) #{key}
         div(class="navbar-end")
           a(class="navbar-item has-text-primary" href="https://twitter.com/codingride")
             i(class="fab fa-twitter")
@@ -75,3 +78,9 @@ body
   script(src="/js/masonry.min.js")
   script(src="/js/imagesloaded.min.js")
   script(src="/js/kalimah.js")
+  script(async src="https://www.googletagmanager.com/gtag/js?id=UA-114335381-1")
+  script.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date())
+    gtag('config', 'UA-114335381-1')

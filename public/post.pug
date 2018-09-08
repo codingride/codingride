@@ -13,11 +13,6 @@ block content
             img(class="main-image" src="https://" + xbData.xbUrl + "/client/" + xbData.xbUser + "/" + xbData.xbProject + "/?type=media&request=" + post.postImage + "&appid=" + xbData.xbAppID + "&size=large")
             div(class="is-overlay")
               span(class="title post-title is-size-5-touch is-size-1-desktop is-pulled-right") #{post.postTitle}
-        else
-          figure(class="image boxRide post-boxRide")
-            img(class="main-image" src="/images/codingRide.png")
-            div(class="is-overlay")
-              span(class="title post-title is-size-5-touch is-size-1-widescreen") #{post.postTitle}
         if post.postBrief
           p(class="shorty")
             span(class="subtitle post-subtitle is-size-7-touch is-size-4-widescreen") #{post.postBrief}
@@ -26,16 +21,16 @@ block content
             small #{tools.timeToDate(post.postDate)}
           p(class="is-pulled-right")
             span(class="icon social-icon")
-              a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.postTitle + "&url=" + globalUrl + "/post/" + post.postLink + "&via=codingride")
+              a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.postTitle + "&url=" + globalUrl + "/" + post.postLink + "&via=codingride")
                 i(class="fab fa-lg fa-twitter")
             span(class="icon social-icon")
-              a(class="has-text-primary fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=" + globalUrl + "/posts/show/" + post.postLink)
+              a(class="has-text-primary fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=" + globalUrl + "/" + post.postLink)
                 i(class="fab fa-lg fa-facebook")
             span(class="icon social-icon")
-              a(class="has-text-primary" href="https://plus.google.com/share?url=" + globalUrl + "/posts/" + post.postLink onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;")
+              a(class="has-text-primary" href="https://plus.google.com/share?url=" + globalUrl + "/" + post.postLink onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;")
                 i(class="fab fa-lg fa-google-plus-g")
             span(class="icon social-icon")
-              a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.title + "&url=" + globalUrl + "/posts/" + post.postLink + "&via=codingride")
+              a(class="has-text-primary" href="https://twitter.com/intent/tweet?text=" + post.title + "&url=" + globalUrl + "/" + post.postLink + "&via=codingride")
                 i(class="fas fa-lg fa-comment")
         if post.postContent
           div(id="post-content" class="content post-content")
@@ -44,7 +39,7 @@ block content
           div(class="footy")
             div(class="tags")
               each val, key in post.postTags
-                a(href="/posts/tag/" + val.tag_link class="tag is-info is-medium") #{val.tag_name}
+                a(href="/tag/" + val.tag_link class="tag is-info is-medium") #{val.tag_name}
         p(class="subtitle listHead")
           strong Let's Hear From You
         div(id="disqus_thread")

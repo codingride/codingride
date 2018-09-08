@@ -30,7 +30,7 @@ content.prepareGetConnection = (type, term) => {
     settings.xbRequest = `${settings.xbPrefix}posts`;
     settings.xbOffset = {
       offset: term.offset,
-      max: 6
+      max: settings.xbMaxRecords
     }
     getRequest = request.prepareGetRequest(settings, 'request-offset');
       break;
@@ -114,7 +114,8 @@ content.posts = (type, term, offset, callback) => {
       let postsParams = new Object;
       if(!postsError && postsData) {
         let postsRes = JSON.parse(postsData);
-        postsParams = JSON.parse(postsRes.data);
+        postsParams.data = JSON.parse(postsRes.data);
+        postsParams.count = postsRes.count
       }
       callback(postsError, postsParams);
     });

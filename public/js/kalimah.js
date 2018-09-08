@@ -1,5 +1,12 @@
 'use strict';
 
+function openMenu() {
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('navbarMenu');
+  burger.classList.toggle('is-active');
+  menu.classList.toggle('is-active');
+}
+
 var swiper = new Swiper('.swiper-container', {
   pagination: {
     el: '.swiper-pagination',
@@ -26,13 +33,13 @@ if(grid) {
 }
 
 function lightBox() {
-  let light = document.getElementById('post-content')
-  let boxes = light.getElementsByTagName('img')
-  for (let i = 0; i < boxes.length; i++) {
-    let linkBox = document.createElement('a')
-    let linkExists = document.getElementById('box_' + i)
+  var light = document.getElementById('post-content')
+  var boxes = light.getElementsByTagName('img')
+  for (var i = 0; i < boxes.length; i++) {
+    var linkBox = document.createElement('a')
+    var linkExists = document.getElementById('box_' + i)
     if (!linkExists) {
-      let imgLink = boxes[i].getAttribute('src')
+      var imgLink = boxes[i].getAttribute('src')
       boxes[i].setAttribute('id', 'box_' + i)
       boxes[i].parentElement.insertBefore(linkBox, boxes[i])
       linkBox.appendChild(boxes[i])
@@ -43,8 +50,8 @@ function lightBox() {
 }
 
 function showLightbox(event) {
-  let imgSrc = event.target.src
-  let newSrc = imgSrc.replace(/\b(size=)(small|medium)/gi, 'large')
+  var imgSrc = event.target.src
+  var newSrc = imgSrc.replace(/\b(size=)(small|medium)/gi, 'large')
   this.selected = { id: event.target.id, image: newSrc }
   this.$store.dispatch('showGallery', true)
 }

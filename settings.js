@@ -5,11 +5,11 @@ let settings = {
     xbUrl: 'xbuffer.net',
     xbPath: 'client',
     xbUser: 'codingride',
-    xbProject: 'codingride_website',
+    xbProject: 'website',
     xbPrefix: 'km_',
-    xbAppID: 'a335573e11cd411068501267c3dd89a410a477e94a246aeab4b3f51f8a0285d0:web',
+    xbAppID: 'bb42a7a45b0f183a8b3e8bca798b756b9ff140231bbe6c59df790fd4a9e95ea8:web',
     xbRecaptcha: '6LczQEgUAAAAAAzvdhR0Q37Q2lnVOdR49GW5MzI-',
-    xbMaxRecords: 9
+    xbMaxRecords: 4
   },
   Website: {
     title: 'codingRide',
@@ -19,9 +19,9 @@ let settings = {
   Menus: {
     main_menu : {
       home : '/',
-      about : '/page/about',
-      coding : '/posts/category/coding',
-      blog : '/posts/category/blog'
+      about : '/about',
+      coding : '/category/coding',
+      blog : '/category/blog'
     },
     footer_menu : {
         home : '/',
@@ -33,7 +33,7 @@ let settings = {
 
 settings.prepareConfigParams = (callback) => {
   let params = {
-    settings: settings.Website,
+    config: settings.Website,
     menus: settings.Menus
   }
   callback(false, params);
