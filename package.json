@@ -2,10 +2,11 @@
   "name": "codingride",
   "version": "2.0.0",
   "description": "CodingRide Website",
-  "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next -p 3001",
+    "build": "next build",
+    "start": "next start"
   },
   "repository": {
     "type": "git",
