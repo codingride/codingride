@@ -1,32 +1,20 @@
 {
   "name": "codingride",
-  "version": "2.0.0",
-  "description": "CodingRide Website",
-  "main": "index.js",
-  "scripts": {
-    "dev": "next -p 3001",
-    "build": "next build",
-    "start": "next start"
-  },
+  "version": "1.0.2",
+  "description": "Kalimah Content Management System",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codingride/codingride.git"
+    "url": "https://github.com/codingride/codingride.git"
   },
-  "keywords": [
-    "Kalimah",
-    "CMS",
-    "Website",
-    "Codingride"
-  ],
+  "main": "kalimah.js",
+  "scripts": {
+    "test": "mocha || true"
+  },
   "author": "Abdullah Alghamdi",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/codingride/codingride/issues"
-  },
-  "homepage": "https://github.com/codingride/codingride#readme",
   "dependencies": {
-    "next": "latest",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "express": "^4.17.1",
+    "he": "^1.2.0",
+    "pug": "^2.0.4"
   }
 }
