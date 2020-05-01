@@ -8,13 +8,17 @@
   },
   "main": "kalimah.js",
   "scripts": {
-    "test": "mocha || true"
+    "test": "mocha || true",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "Abdullah Alghamdi",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "he": "^1.2.0",
-    "pug": "^2.0.4"
-  }
+    "pug": "^2.0.4",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
