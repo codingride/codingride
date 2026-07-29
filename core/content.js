@@ -127,8 +127,10 @@ content.posts = (type, term, offset, callback) => {
 }
 
 content.post = (term, callback) => {
+  
   // get comments as well or using ajax
   let options = content.prepareGetConnection('post', term);
+  
   if(options) {
     request.get(options, (postError, postData) => {
       let postParams = new Object;
