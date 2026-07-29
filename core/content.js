@@ -103,11 +103,13 @@ content.keyword = (term, callback) => {
 }
 
 content.posts = (type, term, offset, callback) => {
+  
   let posts = {
     type: type,
     term: term,
     offset: offset
   }
+  
   let options = content.prepareGetConnection('posts', posts);
   if(options) {
     request.get(options, (postsError, postsData) => {
