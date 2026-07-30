@@ -16,6 +16,7 @@ app.set('view engine', 'pug');
 
 // Get home request
 app.get('/', (req, res) => {
+  
   // Getting Settings and global vars first
   // Website should not be rendered without global vars
   settings.prepareConfigParams((globalsError, globalsData) => {
