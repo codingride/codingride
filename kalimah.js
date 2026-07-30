@@ -51,6 +51,7 @@ app.get('/', (req, res) => {
 
 // Get posts request
 app.get('/:type/:term/:offset?', (req, res) => {
+  
   let acceptedTypes = ['category', 'tag'];
   let reqParams = req.params;
   let type = '';
