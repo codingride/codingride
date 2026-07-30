@@ -187,6 +187,7 @@ app.get('/:term', (req, res) => {
 
 // Handle error requests
 app.use((req, res) => {
+  
   // Getting Settings and global vars first
   // Website should not be rendered without global vars
   settings.prepareConfigParams((globalsError, globalsData) => {
