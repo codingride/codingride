@@ -110,6 +110,7 @@ app.get('/:type/:term/:offset?', (req, res) => {
 // Get post request
 // @params post slug
 app.get('/:term', (req, res) => {
+  
   // Getting Settings and global vars first
   // Website should not be rendered without global vars
   let reqParams = req.params;
