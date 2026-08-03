@@ -77,6 +77,7 @@ app.get('/:type/:term/:offset?', (req, res) => {
     link: link,
     offset: offset
   }
+  
   settings.prepareConfigParams((globalsError, globalsData) => {
     if(!globalsError && globalsData) {
       content.posts(type, term, offset, (postsError, postsData) => {
