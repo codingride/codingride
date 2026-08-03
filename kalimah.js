@@ -72,6 +72,7 @@ app.get('/:type/:term/:offset?', (req, res) => {
   if(reqParams.offset && typeof parseInt(reqParams.offset) === 'number') {
     offset = parseInt(reqParams.offset);
   }
+  
   pagination = {
     link: link,
     offset: offset
