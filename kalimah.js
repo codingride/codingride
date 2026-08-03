@@ -121,6 +121,7 @@ app.get('/:term', (req, res) => {
   let reqParams = req.params;
   let term = '';
   let pagination = {}
+  
   if(reqParams.term) {
     term = tools.typeCheck(reqParams.term, 'string');
     pagination.term = term;
