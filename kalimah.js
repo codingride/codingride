@@ -61,6 +61,7 @@ app.get('/:type/:term/:offset?', (req, res) => {
   if(reqParams.type && acceptedTypes.includes(reqParams.type)) {
     type = reqParams.type;
   }
+  
   if(reqParams.term) {
     term = tools.typeCheck(reqParams.term, 'string');
     pagination.term = term;
