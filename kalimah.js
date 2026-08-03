@@ -66,6 +66,7 @@ app.get('/:type/:term/:offset?', (req, res) => {
     term = tools.typeCheck(reqParams.term, 'string');
     pagination.term = term;
   }
+  
   let link = `/${type}/${term}`
   let offset = 0;
   if(reqParams.offset && typeof parseInt(reqParams.offset) === 'number') {
