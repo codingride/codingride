@@ -6,6 +6,7 @@ const tools = require('./tools');
 let request = {}
 
 request.get = (options, callback) => {
+  
   let result = '';
   let error = null;
   if(options) {
