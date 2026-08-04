@@ -78,6 +78,7 @@ request.prepareGetRequest = (params, type) => {
       break;
   }
   if(query) {
+    
     return {
       host: params.xbUrl,
       path: `/${params.xbPath}/${params.xbUser}/${params.xbProject}/?appid=${params.xbAppID}${query}`,
