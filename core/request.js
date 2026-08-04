@@ -30,6 +30,7 @@ request.get = (options, callback) => {
 }
 
 request.prepareGetRequest = (params, type) => {
+  
   let query = null;
   switch (type) {
     case 'single-id':
