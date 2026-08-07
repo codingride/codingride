@@ -6,6 +6,7 @@ const request = require('./request');
 let content = {}
 
 content.prepareGetConnection = (type, term) => {
+  
   let getRequest = new Object;
   switch (type) {
     case 'home':
