@@ -63,6 +63,7 @@ content.prepareGetConnection = (type, term) => {
 }
 
 content.home = (callback) => {
+  
   let options = content.prepareGetConnection('home');
   if(options) {
     request.get(options, (homeError, homeData) => {
