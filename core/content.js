@@ -80,6 +80,7 @@ content.home = (callback) => {
 }
 
 content.page = (term, callback) => {
+  
   // get comments as well or using ajax
   let options = content.prepareGetConnection('page', term);
   if(options) {
