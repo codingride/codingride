@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
   // Getting Settings and global vars first
   // Website should not be rendered without global vars
   settings.prepareConfigParams((globalsError, globalsData) => {
+    
     if(!globalsError && globalsData) {
       content.home((homeError, homeData) => {
         if(!homeError && homeData) {
@@ -81,6 +82,7 @@ app.get('/:type/:term/:offset?', (req, res) => {
   settings.prepareConfigParams((globalsError, globalsData) => {
     
     if(!globalsError && globalsData) {
+      
       content.posts(type, term, offset, (postsError, postsData) => {
         if(!postsError && postsData) {
           pagination.pages = Math.floor(postsData.count / settings.Xbuffer.xbMaxRecords);
