@@ -200,6 +200,7 @@ app.use((req, res) => {
   // Getting Settings and global vars first
   // Website should not be rendered without global vars
   settings.prepareConfigParams((globalsError, globalsData) => {
+    
     if(!globalsError && globalsData) {
         res.render('error', {
           globalTitle: globalsData.config.title,
