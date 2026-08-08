@@ -131,12 +131,14 @@ app.get('/:term', (req, res) => {
     link: `/${term}`
   }
   settings.prepareConfigParams((globalsError, globalsData) => {
+    
     if(!globalsError && globalsData) {
       let reqParams = req.params;
       let post = '';
       if(reqParams.term) {
         post = tools.typeCheck(reqParams.term, 'string');
       }
+      
       if(post) {
         content.post(post, (postError, postData) => {
           if(!postError && postData) {
