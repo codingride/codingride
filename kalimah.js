@@ -84,6 +84,7 @@ app.get('/:type/:term/:offset?', (req, res) => {
     if(!globalsError && globalsData) {
       
       content.posts(type, term, offset, (postsError, postsData) => {
+        
         if(!postsError && postsData) {
           pagination.pages = Math.floor(postsData.count / settings.Xbuffer.xbMaxRecords);
           console.log(pagination)
