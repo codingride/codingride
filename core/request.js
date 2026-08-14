@@ -33,6 +33,7 @@ request.get = (options, callback) => {
 request.prepareGetRequest = (params, type) => {
   
   let query = null;
+  
   switch (type) {
     case 'single-id':
     query = `&type=data&request=${params.xbRequest}&id=${params.xbId}`;
