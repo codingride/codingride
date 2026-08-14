@@ -28,6 +28,7 @@ content.prepareGetConnection = (type, term) => {
     } else {
       type = 'request-offset';
     }
+      
     settings.xbRequest = `${settings.xbPrefix}posts`;
     settings.xbOffset = {
       offset: term.offset,
