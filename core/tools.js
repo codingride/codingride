@@ -5,6 +5,7 @@ const path = require('path');
 let tools = {}
 
 tools.typeCheck = (data, type) => {
+  
   if(data && type) {
     if(type === 'array') {
       if(Array.isArray(data)) {
