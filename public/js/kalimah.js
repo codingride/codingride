@@ -52,6 +52,7 @@ function lightBox() {
 }
 
 function showLightbox(event) {
+  
   var imgSrc = event.target.src
   var newSrc = imgSrc.replace(/\b(size=)(small|medium)/gi, 'large')
   this.selected = { id: event.target.id, image: newSrc }
