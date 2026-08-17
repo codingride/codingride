@@ -34,6 +34,7 @@ if(grid) {
 }
 
 function lightBox() {
+  
   var light = document.getElementById('post-content')
   var boxes = light.getElementsByTagName('img')
   for (var i = 0; i < boxes.length; i++) {
