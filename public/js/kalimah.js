@@ -16,6 +16,7 @@ var swiper = new Swiper('.swiper-container', {
 });
 
 var grid = document.querySelector( '.grid' );
+
 if(grid) {
   var masonry = new Masonry( grid , {
     itemSelector: '.grid-item',
