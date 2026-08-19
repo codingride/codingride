@@ -93,8 +93,4 @@ request.prepareGetRequest = (params, type) => {
   }
 }
 
-request.preparePostRequest = (params, type) => {
-
-}
-
 module.exports = request;
