@@ -47,6 +47,7 @@ tools.cleanArray = (array) => {
 }
 
 tools.lowerCase = (data) => {
+  
   data = tools.typeCheck(data, 'string');
   if(data) {
     return data.toLowerCase().trim();
