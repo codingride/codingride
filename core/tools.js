@@ -24,6 +24,7 @@ tools.typeCheck = (data, type) => {
 }
 
 tools.timeToDate = (timeStamp) => {
+  
   if(timeStamp) {
     let date = new Date(timeStamp);
     return date.toDateString();
