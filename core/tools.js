@@ -34,6 +34,7 @@ tools.timeToDate = (timeStamp) => {
 }
 
 tools.cleanArray = (array) => {
+  
   array = tools.typeCheck(array, 'array');
   if(array) {
     array = array.filter(value => {
