@@ -57,6 +57,7 @@ tools.lowerCase = (data) => {
 }
 
 tools.securePath = (getPath) => {
+  
   return path.normalize(getPath).replace(/^(\.\.[\/\\])+/, '');
 }
 
